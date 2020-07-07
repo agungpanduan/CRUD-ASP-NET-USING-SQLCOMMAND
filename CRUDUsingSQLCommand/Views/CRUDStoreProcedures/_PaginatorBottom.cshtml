@@ -1,0 +1,109 @@
+﻿@using CRUDUsingSQLCommand.Models;
+
+@model PagingModel
+@{
+    PagingModel pm = Model;
+    if (pm == null)
+    {
+        pm= new PagingModel();
+    }
+}
+
+<div class="row" style="margin-top:10px;">
+ <div class="col-sm-6 col-md-8">
+    <div class="form-inline"> 
+        <div class="form-group page-ori">
+            <nav>
+              <ul class="pagination pagination-sm">
+                 <input type="hidden" id="txtCurrentPage@(pm.IdSuffix)" value="@pm.PositionPage" />
+                <li>
+                    <span>Display @pm.Start to @if (pm.CountData >= pm.End){ @pm.End } else { @pm.CountData } from @pm.CountData rows</span>            
+                </li>
+                 @if (pm.IndexList.Count > 0)
+                    {
+                            <li>
+                                <a class='pagination-theme' href="javascript:btnSearch_onClick@(pm.IdSuffix)(@pm.IndexList[0])">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        foreach (int i in pm.IndexList)
+                        {
+                            if (i < pm.PositionPage - 2 || i > pm.PositionPage + 2)
+                            {
+                            }
+                            else
+                            {
+                             <li>
+                                <a  @if(i == pm.PositionPage)
+                                    { 
+                                       <text>style='background-color: #428bca; color:#FFFFFF;' class='pagination-active-theme text-muted'")</text> 
+                                    }
+                                    else
+                                    { 
+                                        <text>class='pagination-theme'")</text> 
+                                    } href="javascript:btnSearch_onClick@(pm.IdSuffix)(@i)">@i</a>
+                             </li>
+                            }
+                        }
+                         
+                        <li>
+                            <a class='pagination-theme text-muted' href="javascript:btnSearch_onClick@(pm.IdSuffix)(@pm.IndexList[pm.IndexList.Count - 1])">            
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }         
+              </ul>
+            </nav>
+        </div>
+        <div class="form-group" style="padding-bottom:6px;">                                             
+             <input class="form-control" style="width: 50px;height:34px;margin-left:10px;margin-right:0;" type="text" id="txtPagingGo@(pm.IdSuffix)" name="txtPagingGo@(pm.IdSuffix)" @if (@pm.IndexList.Count == 0) { WriteLiteral("readonly"); } />
+               
+             <button type="button" id="btnPagingGo@(pm.IdSuffix)" class="btn btn-xs btn-primary" style="margin-left:-3px;" onclick="javascript:pagingGo@(pm.IdSuffix)()" @if (@pm.IndexList.Count == 0) { WriteLiteral("disabled"); }>Next</button>               
+         </div>  
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+        <div class="form-group text-right">
+            <label class="control-label text-muted" style="margin:5px 5px 0 0;">
+                Display per page
+            </label>
+            <div class="pull-right">            
+                <select class="form-control" id="recordPerPage@(pm.IdSuffix)">
+               
+                @for (int a = 0; a < PagingModel.RECORD_PER_PAGES.Length; a++)
+                {
+                    <option>@PagingModel.RECORD_PER_PAGES[a]</option>
+                }
+                </select>
+            </div>
+        </div>
+   </div> 
+   
+    <script type="text/javascript">
+        function pagingGo@(pm.IdSuffix)() {
+            if($("#txtPagingGo@(pm.IdSuffix)").val() == "") {
+                showErrMesg("Please input the page number");
+
+                return;
+            }
+
+            btnSearch_onClick@(pm.IdSuffix)($("#txtPagingGo@(pm.IdSuffix)").val());
+        }
+
+        $(document).ready(function () {
+            $('#txtPagingGo@(pm.IdSuffix)').numeric({ decimal : false, negative : false });
+
+            $("#txtPagingGo@(pm.IdSuffix)").keyup(function(event){
+                if(event.keyCode == 13){
+                    $("#btnPagingGo@(pm.IdSuffix)").click();
+                }
+            });
+
+            $("#recordPerPage@(pm.IdSuffix)").val("@pm.RecordPerPage");
+
+            $("#recordPerPage@(pm.IdSuffix)").on('change', function () {
+                btnSearch_onClick@(pm.IdSuffix)($("#txtCurrentPage@(pm.IdSuffix)").val());
+            });
+        });
+    </script>
+</div>

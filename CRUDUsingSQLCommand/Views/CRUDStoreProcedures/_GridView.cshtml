@@ -1,0 +1,57 @@
+﻿@using System;
+@using CRUDUsingSQLCommand.Models;
+@using CRUDUsingSQLCommand.Models.CRUDStoreProcedures;
+@{
+    IList<CRUDStoreProcedures> listData = (List<CRUDStoreProcedures>)ViewData["ListData"];
+}
+<div class="container">
+   <table class="table" id="tableclass">
+     <thead>
+       <tr class="table-primary">
+         <th class="text-center grid-checkbox-col" rowspan="2">
+             <input class="grid-checkbox" type="checkbox" id="checkall" />
+         </th>
+         <th rowspan="1">Name</th>
+         <th rowspan="1">Gender</th>
+         <th rowspan="1">Email</th>
+       </tr>
+     </thead>
+     <tbody>
+       @*<tr>
+         <td class="text-center grid-checkbox-col">
+             <input name="chkRow" type="checkbox" class="grid-checkbox grid-checkbox-body" 
+                 data-ClassId=""  value="Male"/>
+         </td>
+         <td>Agung Panduan</td>
+         <td>Male</td>
+         <td>admincool@agungpanduan.com</td>
+       </tr>*@  
+         
+        @if (listData == null || listData.Count == 0)
+         {
+             <tr>
+                 <td colspan="13">No Data Found</td>
+             </tr>
+         }
+         else
+         {
+             foreach (CRUDStoreProcedures data in listData)
+             {    
+                 <tr>
+                    <td class="text-center grid-checkbox-col">
+                        <input name="chkRow" type="checkbox" class="grid-checkbox grid-checkbox-body" 
+                            data-ClassId=""  value=""/>
+                    </td>
+                    <td>@data.Name</td>
+                    <td>@data.Gender</td>
+                    <td>@data.Email</td>
+                </tr>
+             }
+        }
+     </tbody>
+   </table>
+   <div id="divPaging">
+       @Html.Partial("_PaginatorBottom", (PagingModel)ViewData["Paging"])
+       @*@Html.Partial("_PaginatorBottom")*@ 
+   </div>
+</div>   
