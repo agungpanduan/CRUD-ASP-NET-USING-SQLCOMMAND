@@ -34,4 +34,3 @@ D:\Hasil Pelatihan Net\Hasil Pelatihan\MVC\LatihanPercobaan\CRUDUsingSQLCommand\
 D:\Hasil Pelatihan Net\Hasil Pelatihan\MVC\LatihanPercobaan\CRUDUsingSQLCommand\CRUDUsingSQLCommand\bin\System.Web.WebPages.Razor.xml
 D:\Hasil Pelatihan Net\Hasil Pelatihan\MVC\LatihanPercobaan\CRUDUsingSQLCommand\CRUDUsingSQLCommand\obj\Debug\CRUDUsingSQLCommand.dll
 D:\Hasil Pelatihan Net\Hasil Pelatihan\MVC\LatihanPercobaan\CRUDUsingSQLCommand\CRUDUsingSQLCommand\obj\Debug\CRUDUsingSQLCommand.pdb
-D:\Hasil Pelatihan Net\Hasil Pelatihan\MVC\LatihanPercobaan\CRUDUsingSQLCommand\CRUDUsingSQLCommand\obj\Debug\CRUDUsingSQLCommand.csprojResolveAssemblyReference.cache

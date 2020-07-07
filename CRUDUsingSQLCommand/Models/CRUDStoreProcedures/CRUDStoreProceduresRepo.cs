@@ -28,8 +28,8 @@ namespace CRUDUsingSQLCommand.Models.CRUDStoreProcedures
             {
                 com.Parameters.AddWithValue("@Name", DBNull.Value);
                 com.Parameters.AddWithValue("@Email", DBNull.Value);
-                com.Parameters.AddWithValue("@RowStart", 0);
-                com.Parameters.AddWithValue("@RowEnd", 10);
+                com.Parameters.AddWithValue("@RowStart", rowStart);
+                com.Parameters.AddWithValue("@RowEnd", rowEnd);
             }
             else
             {

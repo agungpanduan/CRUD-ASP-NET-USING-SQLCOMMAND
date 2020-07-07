@@ -92,10 +92,10 @@
 <script type="text/javascript">
     $("#btnSave").click(function () {
         var params = new Object();
-        var data = new Object();  
-        data.Name= $("#inputNameInsert").val(),
-        data.Email= $("#inputEmailInsert").val(),
-        data.Gender= $("#cmbGenderInsert").val(),
+        var data = new Object();
+        data.Name = $("#inputNameInsert").val(),
+        data.Email = $("#inputEmailInsert").val(),
+        data.Gender = $("#cmbGenderInsert").val(),
         data.ClassM = $("#cmbClassInsert").val(),
         params.data = data;
 
@@ -118,7 +118,7 @@
                 popUpProgressHide();
                 handleAjaxResponseErrorGrowl(returnResult, "Save Project");
             }
-         });
+        });
     });
 
     function onSaveSuccess() {
@@ -135,7 +135,7 @@
     $("tbody tr").click(function () {
         var Name = $(this).closest("tr").find('td:eq(1)').text();
         var Email = $(this).closest("tr").find('td:eq(3)').text();
-        
+
         $('#inputNameInsert').val(Name);
         $('#inputEmailInsert').val(Email);
     });
@@ -201,32 +201,29 @@
     });
 
 
-    function btnSearch_onClick(x){
-        onSearchCriteria(x);
+    function onSearchCriteria(page) {
+        btnSearch_onClick(1);
     }
 
-    function onSearchCriteria(page) {
+    function btnSearch_onClick(page) {
         $.ajax({
             type: "POST",
             url: "@Url.Content("~/CRUDStoreProcedures/Search")",
-                 data: {
-                     Name:  $("#inputNameInsert").val(),
-                     Email: $("#inputEmailInsert").val(),
-                     recordPerPage: $("#recordPerPage").val(),
-                     currentPage: page
-                 },
-                 success: function (data) {
-                     console.log(data);
-                     $("#divGrid").html(data);
-                     popUpProgressHide();
-
-                     freezeTable.init();
-                     freezeScroll();
-                 },
-                 error: function (returnResult) {
-                     popUpProgressHide();
-                 }
-             });
-         }
+            data: {
+                Name: $("#inputNameInsert").val(),
+                Email: $("#inputEmailInsert").val(),
+                recordPerPage: $("#recordPerPage").val(),
+                currentPage: page
+            },
+            success: function (data) {
+                console.log(data);
+                $("#divGrid").html(data);
+                popUpProgressHide();
+            },
+            error: function (returnResult) {
+                popUpProgressHide();
+            }
+        });
+    }
 
 </script>
